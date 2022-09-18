@@ -11,23 +11,6 @@ const listRef = document.querySelector(".country-list");
 const countryRef = document.querySelector(".country-info");
 
 inputRef.addEventListener('input', debounce(handleInput,DEBOUNCE_DELAY));
-//inputRef.addEventListener('input', handleInput);
-
-/*
-function fetchCountries(name) {
-    const url = BASE_URL + `${name}?fields=name,population,capital,flags,languages`;
-    
-    return fetch(url)
-        .then(response => {
-        if (!response.ok) {
-            throw new Error(response.status);
-        }        
-        return response.json();
-    })
-        .catch (error => {       
-        Notiflix.Notify.failure("Oops, there is no country with that name");
-  });
-}*/
 
 function handleInput(e) {
     e.preventDefault();
@@ -50,7 +33,9 @@ function handleInput(e) {
             return;
         }
         renderOne(data);
-    });
+    }).catch (error => {       
+        Notiflix.Notify.failure("Oops, there is no country with that name");
+  });
 }
 
 function renderList(countries) {
